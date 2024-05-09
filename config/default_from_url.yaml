@@ -59,7 +59,10 @@ instance_template: |-
   6. When editing files, it is easy to accidentally specify a wrong line number or to write code with incorrect indentation. Always check the code after you issue an edit to make sure that it reflects what you wanted to accomplish. If it didn't, issue another command to fix it.
 
   7. It may be necessary to install the repository from source before you can run code. Please think about how to install the environment from the repository directory if you need to do so.
-     
+
+  8. While editing files, make sure to write complete implementations instead of writing TODOs or introducing placeholder. Do not in any case leave the implementation to the user. If the implementation was missing for something, issue another command to fix it.
+  
+  9. While editing files, if the implementation is not clear, use the existing code as a reference and write complete implementation. If the implementation is missing something or makes unjust assumptions, issue another command to fix it.
 
   (Open file: {open_file})
   (Current directory: {working_dir})

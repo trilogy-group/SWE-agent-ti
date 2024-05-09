@@ -81,7 +81,7 @@ edit() {
         _constrain_line
         _print
 
-        echo "File updated. Please review the changes and make sure they are correct (correct indentation, no duplicate lines, etc). Edit the file again if necessary."
+        echo "File updated. Please review the changes and make sure they are correct (correct indentation, no duplicate lines, etc) and contain complete implementations instead of TODOs or placeholders. Edit the file again if necessary. You can use the existing code as a guide for that."
     else
         echo "Your proposed edit has introduced new syntax error(s). Please read this error message carefully and then retry editing the file."
         echo ""
