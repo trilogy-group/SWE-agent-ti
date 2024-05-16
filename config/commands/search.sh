@@ -153,3 +153,27 @@ find_file() {
     echo "Found $num_matches matches for \"$file_name\" in $dir:"
     echo "$matches" | awk '{print $0}'
 }
+
+# @yaml
+# signature: search_internet <search_query>
+# docstring: searches for search_query on the internet
+# arguments:
+#   search_query:
+#     type: string
+#     description: the query to search for on the internet
+#     required: true
+search_internet() {
+    # Check if the first argument is provided
+    if [ -z "$1" ]; then
+        echo "Usage: search_internet <search_query>"
+        return
+    fi
+    current_dir=$(pwd)
+    cd /ai-code-maintainer/
+    set -o allexport && source .env && set +o allexport
+    local dependencies=$(python3.11 -m pip install -r src/requirements.txt)
+    local search_term="$1"
+    local output=$(python3.11 export_researcher.py "$search_query")
+    cd $current_dir
+    echo "$output"
+}

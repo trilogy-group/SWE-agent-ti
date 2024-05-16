@@ -65,7 +65,7 @@ class EnvironmentArguments(FrozenSerializable):
     base_commit: Optional[str] = None  # used only with data_path as url
     container_name: Optional[str] = None
     install_environment: bool = True
-    timeout: int = 35
+    timeout: int = 3500
     verbose: bool = False
     no_mirror: bool = False
     # Custom environment setup. Currently only used when data_path points to a single issue.
@@ -75,6 +75,7 @@ class EnvironmentArguments(FrozenSerializable):
     environment_setup: Optional[str] = None
     # Only used when running on single issue. Path to local repository or github repository. 
     repo_path: str = ""
+    researcher_repo_path: str = ""
 
 
 
@@ -159,6 +160,7 @@ class SWEEnv(gym.Env):
         Returns:
             folder name of clone
         """
+        copy_anything_to_container(self.container_obj, self.args.researcher_repo_path, "/ai-code-maintainer")
         assert self.record is not None  # mypy
         for hook in self.hooks:
             hook.on_copy_repo_started(repo_type=self.record["repo_type"], repo_path=self.record["repo"])
@@ -339,7 +341,7 @@ class SWEEnv(gym.Env):
         # Attempt to run action in container
         observation = ""
         try:
-            observation = self.communicate(input=action, timeout_duration=25)
+            observation = self.communicate(input=action, timeout_duration=900)
         except TimeoutError:
             try:
                 self.interrupt()
@@ -931,3 +933,4 @@ class SWEEnv(gym.Env):
                 "any required changes onto the branch and then click "
                 "'Ready for Review' to bring it to the attention of the maintainers."
             )
+

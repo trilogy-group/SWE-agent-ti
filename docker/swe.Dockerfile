@@ -1,4 +1,4 @@
-FROM ubuntu:jammy
+FROM python:3.11
 
 ARG TARGETARCH
 
