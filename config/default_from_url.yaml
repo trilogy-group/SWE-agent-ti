@@ -54,6 +54,10 @@ instance_template: |-
 
   7. If you need information about new Java APIs, use the `search_internet` command to fetch that information and use it figure out how to update the code.
 
+  8. While editing files, make sure that you do not accidentally remove the tags or code that is not intended.
+
+  9. Before submitting the changes, use the `get_patch` command and review the diff patch to make sure that it will not lead to any syntax or tag mismatch issue(there is no missing or additional tag). If issue is found, issue other commands to fix those.
+
   (Open file: {open_file})
   (Current directory: {working_dir})
   bash-$

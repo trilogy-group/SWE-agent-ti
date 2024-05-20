@@ -42,6 +42,7 @@ open() {
         echo "Usage: open <file>"
         return
     fi
+    echo $(git status)
     # Check if the second argument is provided
     if [ -n "$2" ]; then
         # Check if the provided argument is a valid number
@@ -184,12 +185,29 @@ submit() {
     # Check if the patch file exists and is non-empty
     if [ -s "/root/test.patch" ]; then
         # Apply the patch in reverse
+        echo "Applying patch in reverse"
         git apply -R < "/root/test.patch"
     fi
-
     git add -A
     git diff --cached > model.patch
     echo "<<SUBMISSION||"
     cat model.patch
     echo "||SUBMISSION>>"
+}
+
+# @yaml
+# signature: get_patch
+# docstring: outputs the diff patch created showing the changes made to the code
+get_patch() {
+    cd $ROOT
+    # Check if the patch file exists and is non-empty
+    if [ -s "/root/test.patch" ]; then
+        # Apply the patch in reverse
+        echo "Applying patch in reverse"
+        git apply -R < "/root/test.patch"
+    fi
+    git add -A
+    git diff --cached > model.patch
+    cat model.patch
+    rm model.patch
 }
