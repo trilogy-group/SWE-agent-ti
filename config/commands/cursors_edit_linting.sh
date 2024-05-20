@@ -49,7 +49,7 @@ edit() {
         export END_CURSOR=$((num_lines == 0 ? START_CURSOR : START_CURSOR + num_lines - 1))
         export START_CURSOR=$START_CURSOR
         _print
-        echo "File updated. Please review the changes and make sure they are correct (correct indentation, no duplicate lines, etc) and contain complete implementations instead of TODOs or placeholders. Edit the file again if necessary. You can use the existing code as a guide for that."
+        echo "File updated. Please review the changes and make sure they are correct (correct indentation, no duplicate lines, etc) and contain complete implementations instead of TODOs or placeholders. Edit the file again if necessary. You can use the existing code as a guide for that. In case the change is in yaml or html files, check whether all the tags are closed properly."
     else
         echo "Your proposed edit has introduced new syntax error(s). Please read this error message carefully and then retry editing the file."
         echo ""
