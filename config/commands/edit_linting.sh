@@ -70,6 +70,8 @@ edit() {
     # Run linter
     if [[ $CURRENT_FILE == *.py ]]; then
         lint_output=$(flake8 --isolated --select=F821,F822,F831,E111,E112,E113,E999,E902 "$CURRENT_FILE" 2>&1)
+    elif [[ $CURRENT_FILE == *.xml ]]; then
+        lint_output=$(xmllint --noout --nowarning "$CURRENT_FILE" 2>&1)
     else
         # do nothing
         lint_output=""
