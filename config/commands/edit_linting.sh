@@ -72,6 +72,8 @@ edit() {
         lint_output=$(flake8 --isolated --select=F821,F822,F831,E111,E112,E113,E999,E902 "$CURRENT_FILE" 2>&1)
     elif [[ $CURRENT_FILE == *.xml ]]; then
         lint_output=$(xmllint --noout --nowarning "$CURRENT_FILE" 2>&1)
+    elif [[ $CURRENT_FILE == *.java ]]; then
+        lint_output=$(pmd check -f text -R category/java/errorprone.xml --minimum-priority=MEDIUM_HIGH -d "$CURRENT_FILE" | grep "ParseException"; if [ $? -eq 0 ]; then exit 1; fi) 2>/dev/null)
     else
         # do nothing
         lint_output=""

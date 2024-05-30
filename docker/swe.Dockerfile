@@ -37,6 +37,12 @@ RUN conda --version \
     && conda init bash \
     && conda config --append channels conda-forge
 
+# Install PMD
+RUN wget https://github.com/pmd/pmd/releases/download/pmd_releases/7.1.0/pmd-dist-7.1.0-bin.zip
+RUN unzip pmd-dist-7.1.0-bin.zip -d /root/pmd
+ENV PATH="/root/pmd/bin:${PATH}"
+ARG PATH="/root/pmd/bin:${PATH}"
+
 # Install python packages
 COPY docker/requirements.txt /root/requirements.txt
 RUN pip install -r /root/requirements.txt
