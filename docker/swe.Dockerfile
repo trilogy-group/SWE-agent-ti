@@ -8,6 +8,11 @@ RUN apt-get update && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
+# Install OpenJDK-11
+RUN apt-get update && \
+    apt-get install -y openjdk-17-jre-headless && \
+    apt-get clean;
+
 # Initialize git
 RUN git config --global user.email "sweagent@pnlp.org"
 RUN git config --global user.name "sweagent"
@@ -39,9 +44,9 @@ RUN conda --version \
 
 # Install PMD
 RUN wget https://github.com/pmd/pmd/releases/download/pmd_releases/7.1.0/pmd-dist-7.1.0-bin.zip
-RUN unzip pmd-dist-7.1.0-bin.zip -d /root/pmd
-ENV PATH="/root/pmd/bin:${PATH}"
-ARG PATH="/root/pmd/bin:${PATH}"
+RUN unzip pmd-dist-7.1.0-bin.zip -d /root
+ENV PATH="/root/pmd-bin-7.1.0/bin:${PATH}"
+ARG PATH="/root/pmd-bin-7.1.0/bin:${PATH}"
 
 # Install python packages
 COPY docker/requirements.txt /root/requirements.txt
