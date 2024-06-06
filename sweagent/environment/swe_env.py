@@ -232,6 +232,7 @@ class SWEEnv(gym.Env):
         for cmd in [
             "echo -n > /root/files_to_edit.txt",
             f"cd {self._repo_name}",
+            "git reset --hard",
             "export ROOT=$(pwd -P)",
             "git status",
             "git restore .",

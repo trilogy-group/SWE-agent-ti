@@ -52,6 +52,9 @@ ARG PATH="/root/pmd-bin-7.1.0/bin:${PATH}"
 COPY docker/requirements.txt /root/requirements.txt
 RUN pip install -r /root/requirements.txt
 
+RUN curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | bash
+RUN apt-get install git-lfs
+
 WORKDIR /
 
 CMD ["/bin/bash"]
