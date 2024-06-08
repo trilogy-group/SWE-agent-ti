@@ -45,8 +45,6 @@ RUN conda --version \
 # Install PMD
 RUN wget https://github.com/pmd/pmd/releases/download/pmd_releases/7.1.0/pmd-dist-7.1.0-bin.zip
 RUN unzip pmd-dist-7.1.0-bin.zip -d /root
-ENV PATH="/root/pmd-bin-7.1.0/bin:${PATH}"
-ARG PATH="/root/pmd-bin-7.1.0/bin:${PATH}"
 
 # Install python packages
 COPY docker/requirements.txt /root/requirements.txt

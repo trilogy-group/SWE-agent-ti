@@ -73,7 +73,7 @@ edit() {
     elif [[ $CURRENT_FILE == *.xml ]]; then
         lint_output=$(xmllint --noout --nowarning "$CURRENT_FILE" 2>&1)
     elif [[ $CURRENT_FILE == *.java ]]; then
-        lint_output=$((pmd check -f text -R category/java/errorprone.xml --minimum-priority=MEDIUM_HIGH -d "$CURRENT_FILE" | grep "ParseException"; if [ $? -eq 0 ]; then exit 1; fi) 2>/dev/null)
+        lint_output=$((/root/pmd-bin-7.1.0/bin/pmd check -f text -R category/java/errorprone.xml --minimum-priority=MEDIUM_HIGH -d "$CURRENT_FILE" | grep "ParseException"; if [ $? -eq 0 ]; then exit 1; fi) 2>/dev/null)
     else
         # do nothing
         lint_output=""
