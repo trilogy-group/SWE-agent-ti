@@ -9,7 +9,7 @@ pandas
 rich
 ruamel.yaml
 swebench>=1.0.1
-tenacity
+tenacity==8.3.0
 unidiff
 simple-parsing
 # Versions of together below 1.1.0 are not compatible. see https://github.com/princeton-nlp/SWE-agent/issues/135

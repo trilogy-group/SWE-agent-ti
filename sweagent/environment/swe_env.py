@@ -577,7 +577,7 @@ class SWEEnv(gym.Env):
             return ""
 
     def communicate_with_handling(
-        self, input: str, error_msg: str, timeout_duration=25
+        self, input: str, error_msg: str, timeout_duration=180
     ) -> str:
         """
         Wrapper for communicate function that raises error if return code is non-zero
