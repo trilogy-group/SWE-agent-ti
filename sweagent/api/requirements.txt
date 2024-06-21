@@ -6,7 +6,7 @@ config==0.5.1
 decorator @ file:///home/conda/feedstock_root/build_artifacts/decorator_1641555617451/work
 docker==7.0.0
 Flask==3.0.3
-Flask-Cors==4.0.0
+Flask-Cors==4.0.1
 Flask-SocketIO==5.3.6
 ghapi==1.0.5
 GitPython==3.1.43
