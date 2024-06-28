@@ -311,6 +311,12 @@ class AnthropicModel(BaseModel):
             "cost_per_input_token": 3e-06,
             "cost_per_output_token": 1.5e-05,
         },
+         "claude-3-5-sonnet-20240620": {
+            "max_context": 200_000,
+            "max_tokens": 4096,
+            "cost_per_input_token": 3e-06,
+            "cost_per_output_token": 1.5e-05,
+        },
         "claude-3-haiku-20240307": {
             "max_context": 200_000,
             "max_tokens": 4096,
@@ -323,6 +329,7 @@ class AnthropicModel(BaseModel):
         "claude-2": "claude-2.1",
         "claude-opus": "claude-3-opus-20240229",
         "claude-sonnet": "claude-3-sonnet-20240229",
+        "claude-sonnet-3.5": "claude-3-5-sonnet-20240620",
         "claude-haiku": "claude-3-haiku-20240307",
     }
 
