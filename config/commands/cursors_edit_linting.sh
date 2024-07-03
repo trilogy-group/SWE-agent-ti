@@ -8,7 +8,7 @@
 # arguments:
 #   replacement_text:
 #     type: string
-#     description: the text to replace the current selection with
+#     description: the text to replace the current selection with, do not forget to end it with end_of_edit
 #     required: true
 edit() {
     if [ -z "$CURRENT_FILE" ]

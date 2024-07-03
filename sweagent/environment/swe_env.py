@@ -165,9 +165,16 @@ class SWEEnv(gym.Env):
         for hook in self.hooks:
             hook.on_copy_repo_started(repo_type=self.record["repo_type"], repo_path=self.record["repo"])
         if self.record["repo_type"] == "local":
-            copy_anything_to_container(self.container_obj, self.record["repo"].removeprefix("local://"), "/"+self._repo_name)
+            copy_anything_to_container(self.container_obj, self._repo_path, "/"+self._repo_name)
+            self.communicate_with_handling(input=f"mkdir -p {self._repo_path}", error_msg="Unable to setup repository")
+            copy_anything_to_container(self.container_obj, self._repo_path, self._repo_path)
+            self.communicate_with_handling(input=f"ls {self._repo_path}", error_msg="Unable to list repository")
             self.communicate_with_handling(
                 input=f"chown -R root:root {self._repo_name}",
+                error_msg="Failed to change permissions on copied repository",
+            )
+            self.communicate_with_handling(
+                input=f"chown -R root:root {self._repo_path}",
                 error_msg="Failed to change permissions on copied repository",
             )
             return self._repo_name
@@ -223,15 +230,18 @@ class SWEEnv(gym.Env):
         ### Reset Container ###
 
         # Clone repository if not already cloned
+        self._repo_path = self.record["repo"].removeprefix("local://")
         self.communicate(input="cd /")
-        folders = self.communicate(input="ls").split("\n")
-        if self._repo_name not in folders:
-            self._copy_repo()
+        if not self.persistent:
+            folders = self.communicate(input="ls").split("\n")
+            if self._repo_name not in folders:
+                self._copy_repo()
 
         # Clean repository of any modifications + Checkout base commit
         for cmd in [
             "echo -n > /root/files_to_edit.txt",
-            f"cd {self._repo_name}",
+            f"cd {self._repo_path}",
+            f"git config --global --add safe.directory {self._repo_path}",
             "git reset --hard",
             "export ROOT=$(pwd -P)",
             "git status",
@@ -394,7 +404,7 @@ class SWEEnv(gym.Env):
         self.container.terminate()
         if self.persistent:
             if self.container_obj.status not in {"paused", "exited"}:
-                self.container_obj.pause()
+                # self.container_obj.pause()
                 self.logger.info("Agent container paused")
             else:
                 self.logger.info(f"Agent container status: {self.container_obj.status}")
@@ -934,4 +944,3 @@ class SWEEnv(gym.Env):
                 "any required changes onto the branch and then click "
                 "'Ready for Review' to bring it to the attention of the maintainers."
             )
-

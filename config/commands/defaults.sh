@@ -193,6 +193,7 @@ submit() {
     echo "<<SUBMISSION||"
     cat model.patch
     echo "||SUBMISSION>>"
+    rm -f model.patch
 }
 
 # @yaml
@@ -209,5 +210,5 @@ get_patch() {
     git add -A
     git diff --cached > model.patch
     cat model.patch
-    rm model.patch
+    rm -f model.patch
 }

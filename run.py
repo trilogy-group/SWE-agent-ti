@@ -177,25 +177,25 @@ class SaveApplyPatchHook(MainHook):
         console = rich.console.Console()
         msg = [
             "SWE-agent has produced a patch that it believes will solve the issue you submitted!",
-            "Use the code snippet below to inspect or apply it!"
+            # "Use the code snippet below to inspect or apply it!"
         ]
         panel = rich.panel.Panel.fit(
             "\n".join(msg),
             title="🎉 Submission successful 🎉",
         )
         console.print(panel)
-        content = [
-            "```bash",
-            f"# The patch has been saved to your local filesystem at:",
-            f"PATCH_FILE_PATH='{patch_output_file.resolve()}'",
-            "# Inspect it:",
-            "cat \"${PATCH_FILE_PATH}\"",
-            "# Apply it to a local repository:",
-            f"cd <your local repo root>",
-            "git apply \"${PATCH_FILE_PATH}\"",
-            "```",
-        ]
-        console.print(rich.markdown.Markdown("\n".join(content)))
+        # content = [
+            # "```bash",
+            # f"# The patch has been saved to your local filesystem at:",
+            # f"PATCH_FILE_PATH='{patch_output_file.resolve()}'",
+            # "# Inspect it:",
+            # "cat \"${PATCH_FILE_PATH}\"",
+            # "# Apply it to a local repository:",
+            # f"cd <your local repo root>",
+            # "git apply \"${PATCH_FILE_PATH}\"",
+        #     "```",
+        # ]
+        # console.print(rich.markdown.Markdown("\n".join(content)))
 
     def _save_patch(self, instance_id: str, info) -> Optional[Path]:
         """Create patch files that can be applied with `git am`.
