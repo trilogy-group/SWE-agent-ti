@@ -1,6 +1,6 @@
 anthropic==0.25.3
 blinker==1.7.0
-certifi==2024.2.2
+certifi==2024.7.4
 cloudpickle==3.0.0
 config==0.5.1
 decorator @ file:///home/conda/feedstock_root/build_artifacts/decorator_1641555617451/work
